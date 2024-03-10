@@ -1,18 +1,21 @@
 #ifndef GRAPH_HPP
 #define GRAPH_HPP
 
-#include <list>
+#include <map>
+#include <vector>
 
 using namespace std;
 
 class Graph {
     int V;
-    list<int> *adjL;
+    map<char, vector<char>> adjLst;
+    vector<vector<bool>> adjMtx;
 
 public:
     Graph(int V);
-    void addEdge(int v, int w);
-    void printGraph();
+    void addEdge(char v, char w);
+    void printAdjList();
+    void printAdjMatrix();
 };
 
 #endif
