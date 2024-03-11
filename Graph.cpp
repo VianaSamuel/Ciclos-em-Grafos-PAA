@@ -7,17 +7,17 @@ using namespace std;
 //       CONSTRUTOR       //
 // ====================== //
 Graph::Graph(int V) {
-    // ----- VERTICES -----//
+    // ----- VERTICES ----- //
     // inicializa o numero de vertices
     this->V = V;
 
-    // ----- LISTA -----//
+    // ----- LISTA ----- //
     // inicializa a lista de adjacencia, onde:
     // chave = vertice
     // valor = lista de vertices adjacentes
     adjLst = map<char, vector<char>>();
 
-    // ----- MATRIZ -----//
+    // ----- MATRIZ ----- //
     // inicializa a matriz de adjacencia, onde:
     // linhas = V elementos
     // colunas = V elementos inicializados como false
@@ -28,7 +28,7 @@ Graph::Graph(int V) {
 //       ARESTAS      //
 // ================== //
 void Graph::addEdge(char v, char w) {
-    // ----- TRATAMENTO -----//
+    // ----- TRATAMENTO ----- //
     if (v - 'A' >= V || w - 'A' >= V) {
         cout << "Erro: O tamanho de vértices inicializado no grafo foi excedido" << endl;
         return;
@@ -40,11 +40,11 @@ void Graph::addEdge(char v, char w) {
     v = toupper(v);
     w = toupper(w);
 
-    // ----- LISTA -----//
+    // ----- LISTA ----- //
     adjLst[v].push_back(w);
     adjLst[w].push_back(v);
 
-    // ----- MATRIZ -----//
+    // ----- MATRIZ ----- //
     adjMtx[v - 'A'][w - 'A'] = true;
     adjMtx[w - 'A'][v - 'A'] = true;
 }
@@ -52,7 +52,7 @@ void Graph::addEdge(char v, char w) {
 // =================== //
 //       PRINT'S       //
 // =================== //
-// ----- LISTA -----//
+// ----- LISTA ----- //
 void Graph::printAdjList() {
     cout << endl;
     cout << "LISTA" << endl;
@@ -69,7 +69,7 @@ void Graph::printAdjList() {
     cout << "#---#" << endl;
 }
 
-// ----- MATRIZ -----//
+// ----- MATRIZ ----- //
 void Graph::printAdjMatrix() {
     cout << endl;
     cout << "MATRIZ" << endl;
