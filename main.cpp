@@ -5,17 +5,17 @@ using namespace std;
 
 int main() {
     Graph g(6);
-    g.addEdge('A', 'B');
-    g.addEdge('A', 'D');
-    g.addEdge('A', 'E');
-    g.addEdge('B', 'C');
-    g.addEdge('B', 'D');
-    g.addEdge('B', 'E');
-    g.addEdge('C', 'D');
-    g.addEdge('C', 'E');
-    g.addEdge('C', 'F');
-    g.addEdge('D', 'F');
-    g.addEdge('E', 'F');
+    g.addEdge(0, 1);
+    g.addEdge(0, 3);
+    g.addEdge(0, 4);
+    g.addEdge(1, 2);
+    g.addEdge(1, 3);
+    g.addEdge(1, 4);
+    g.addEdge(2, 3);
+    g.addEdge(2, 4);
+    g.addEdge(2, 5);
+    g.addEdge(3, 5);
+    g.addEdge(4, 5);
 
     g.printAdjList();
     g.printAdjMatrix();

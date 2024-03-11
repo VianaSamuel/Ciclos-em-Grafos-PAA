@@ -8,12 +8,12 @@ using namespace std;
 
 class Graph {
     int V;
-    map<char, vector<char>> adjLst;
+    map<int, vector<int>> adjLst;
     vector<vector<bool>> adjMtx;
 
 public:
     Graph(int V);
-    void addEdge(char v, char w);
+    void addEdge(int v, int w);
     void printAdjList();
     void printAdjMatrix();
 };

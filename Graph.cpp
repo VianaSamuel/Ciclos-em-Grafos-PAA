@@ -15,7 +15,7 @@ Graph::Graph(int V) {
     // inicializa a lista de adjacencia, onde:
     // chave = vertice
     // valor = lista de vertices adjacentes
-    adjLst = map<char, vector<char>>();
+    adjLst = map<int, vector<int>>();
 
     // ----- MATRIZ ----- //
     // inicializa a matriz de adjacencia, onde:
@@ -27,26 +27,20 @@ Graph::Graph(int V) {
 // ================== //
 //       ARESTAS      //
 // ================== //
-void Graph::addEdge(char v, char w) {
+void Graph::addEdge(int v, int w) {
     // ----- TRATAMENTO ----- //
-    if (v - 'A' >= V || w - 'A' >= V) {
-        cout << "Erro: O tamanho de vértices inicializado no grafo foi excedido" << endl;
+    if (v < 0 || v >= this->V || w < 0 || w >= this->V) {
+        cout << "Erro: Os vértices fornecidos devem estar dentro do intervalo válido (0 a " << this->V-1 << ")." << endl;
         return;
     }
-    if (!isalpha(v) || !isalpha(w)) {
-        cout << "Erro: Os vértices fornecidos não são caracteres alfabéticos" << endl;
-        return;
-    }
-    v = toupper(v);
-    w = toupper(w);
-
+    
     // ----- LISTA ----- //
     adjLst[v].push_back(w);
     adjLst[w].push_back(v);
 
     // ----- MATRIZ ----- //
-    adjMtx[v - 'A'][w - 'A'] = true;
-    adjMtx[w - 'A'][v - 'A'] = true;
+    adjMtx[v][w] = true;
+    adjMtx[w][v] = true;
 }
 
 // =================== //
@@ -61,7 +55,7 @@ void Graph::printAdjList() {
     for (const auto &pair : adjLst) {
         cout << "| " << pair.first << " |-> ";
         // LISTA (valor .second) DE ADJACENTES w //
-        for (char w : pair.second) {
+        for (int w : pair.second) {
             cout << w << " ";
         }
         cout << endl;
@@ -73,10 +67,15 @@ void Graph::printAdjList() {
 void Graph::printAdjMatrix() {
     cout << endl;
     cout << "MATRIZ" << endl;
-    cout << "#---#" << endl;
+    cout << "#---#  ";
+    for (int i = 0; i < V; ++i) {
+        cout << " " << i;
+    }
+    cout << endl;
+    
     // VERTICE (linha) v //
     for (int v = 0; v < V; ++v) {
-        cout << "| " << static_cast<char>(v + 'A') << " |-> ";
+        cout << "| " << v << " |-> ";
         // VERTICE (coluna) u //
         for (int u = 0; u < V; ++u) {
             // CONEXAO ENTRE v E u ? //
