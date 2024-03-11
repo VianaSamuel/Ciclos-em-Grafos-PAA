@@ -29,8 +29,12 @@ Graph::Graph(int V) {
 // ================== //
 void Graph::addEdge(char v, char w) {
     // ----- TRATAMENTO -----//
-    if (v < 'A' || v > 'Z' || w < 'A' || w > 'Z') {
-        cout << "Erro: Os vértices fornecidos estão fora do intervalo válido ('A' a 'Z')" << endl;
+    if (v - 'A' >= V || w - 'A' >= V) {
+        cout << "Erro: O tamanho de vértices inicializado no grafo foi excedido" << endl;
+        return;
+    }
+    if (!isalpha(v) || !isalpha(w)) {
+        cout << "Erro: Os vértices fornecidos não são caracteres alfabéticos" << endl;
         return;
     }
     v = toupper(v);
