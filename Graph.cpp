@@ -24,13 +24,14 @@ Graph::Graph(int V) {
     adjMtx.resize(V, vector<bool>(V, false));
 }
 
+
 // ================== //
 //       ARESTAS      //
 // ================== //
 void Graph::addEdge(int v, int w) {
     // ----- TRATAMENTO ----- //
     if (v < 0 || v >= this->V || w < 0 || w >= this->V) {
-        cout << "Erro: Os vértices fornecidos devem estar dentro do intervalo válido (0 a " << this->V-1 << ")." << endl;
+        cout << endl << "Erro: Os vértices fornecidos devem estar dentro do intervalo válido (0 a " << this->V-1 << ")." << endl;
         return;
     }
     
@@ -43,13 +44,13 @@ void Graph::addEdge(int v, int w) {
     adjMtx[w][v] = true;
 }
 
+
 // =================== //
 //       PRINT'S       //
 // =================== //
 // ----- LISTA ----- //
 void Graph::printAdjList() {
-    cout << endl;
-    cout << "LISTA" << endl;
+    cout << endl << "LISTA" << endl;
     cout << "#---#" << endl;
     // VERTICE (chave .first) v //
     for (const auto &pair : adjLst) {
@@ -65,19 +66,18 @@ void Graph::printAdjList() {
 
 // ----- MATRIZ ----- //
 void Graph::printAdjMatrix() {
-    cout << endl;
-    cout << "MATRIZ" << endl;
+    cout << endl << "MATRIZ" << endl;
     cout << "#---#  ";
-    for (int i = 0; i < V; ++i) {
+    for (int i=0; i<V; ++i) {
         cout << " " << i;
     }
     cout << endl;
     
     // VERTICE (linha) v //
-    for (int v = 0; v < V; ++v) {
+    for (int v=0; v<V; ++v) {
         cout << "| " << v << " |-> ";
         // VERTICE (coluna) u //
-        for (int u = 0; u < V; ++u) {
+        for (int u=0; u<V; ++u) {
             // CONEXAO ENTRE v E u ? //
             cout << (adjMtx[v][u] ? "1 " : "0 ");
         }
@@ -85,3 +85,13 @@ void Graph::printAdjMatrix() {
     }
     cout << "#---#" << endl;
 }
+
+
+// ==================== //
+//       GETTER'S       //
+// ==================== //
+// ----- GET V ----- //
+int Graph::getV() const { return this->V; }
+
+// ----- GET LISTA ----- //
+const map<int, vector<int>>& Graph::getAdjLst() const { return this->adjLst; }
