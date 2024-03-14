@@ -11,7 +11,7 @@ class CycleDetectionDFS {
 public:
     CycleDetectionDFS(const Graph& G);
     void hasCycle();
-    bool hasCycleHelper(int node, bool *visited, int parent);
+    bool dfsCycleCheck(int node, bool *visited, int parent);
 };
 
 #endif

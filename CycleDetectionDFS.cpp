@@ -2,42 +2,62 @@
 #include "CycleDetectionDFS.hpp" 
 #include <iostream> 
 
-using namespace std; 
-CycleDetectionDFS::CycleDetectionDFS(const Graph& G) : G(G) { 
-    // Inicializa o objeto com o grafo fornecido
-}
+using namespace std;
 
+// ====================== //
+//       CONSTRUTOR       //
+// ====================== //
+// inicializa o CycleDetectionDFS com um grafo fornecido
+CycleDetectionDFS::CycleDetectionDFS(const Graph& G) : G(G) { }
+
+
+// ==================== //
+//       DETECÇÃO       //
+// ==================== //
 void CycleDetectionDFS::hasCycle() {
-    int V = G.getV(); // Obtém o número de vértices do grafo
-    bool *visited = new bool[V]; // Cria um array dinâmico para marcar vértices visitados
-
-    // Inicializa todos os vértices como não visitados
+    // ----- INICIALIZAÇÃO ----- //
+    // obtém o número de vértices do grafo, cria um array de vértices visitados e os inicializa como não visitados
+    int V = G.getV();
+    bool *visited = new bool[V];
     for (int v = 0; v < V; v++) {
         visited[v] = false;
     }
 
-    // Inicia a busca em profundidade a partir do vértice 0, com -1 como vértice pai (não tem pai)
-    bool ret = hasCycleHelper(0, visited, -1);
-
-    // Imprime o resultado da detecção de ciclos
+    // ----- DFS ----- //
+    // realiza a busca em profundidade a partir do vértice 0, utilizando -1 como vértice-pai
+    bool ret = dfsCycleCheck(0, visited, -1);
     cout << endl << "CycleDetectionDFS:" << endl << "O grafo " << (ret ? "possui" : "não possui") << " ciclo(s)." << endl;
     
-    // Libera a memória alocada para o array visited
+    // ----- MEMÓRIA -----//
+    // libera a memória alocada para o array
     delete[] visited;
 }
 
-bool CycleDetectionDFS::hasCycleHelper(int node, bool *visited, int parent) {
-    map<int, vector<int>> adjLst = G.getAdjLst(); // Obtém a lista de adjacências do grafo
-    visited[node] = true; // Marca o vértice atual como visitado
 
-    // Itera sobre todos os vértices adjacentes ao vértice atual
+// =============== //
+//       DFS       //
+// =============== //
+bool CycleDetectionDFS::dfsCycleCheck(int node, bool *visited, int parent) {
+    // ----- INICIALIZAÇÃO ----- //
+    // obtém a lista de adjacência do grafo e marca o vértice atual como visitado
+    map<int, vector<int>> adjLst = G.getAdjLst();
+    visited[node] = true;
+
+    // ----- ITERAÇÃO ----- //
+    // itera sobre todos os vértices adjacentes ao vértice atual
     for (const auto& w : adjLst.at(node)) {
-        if (!visited[w]) { // Se o vértice adjacente não foi visitado
-            if (hasCycleHelper(w, visited, node)) return true; // Faz uma chamada recursiva para esse vértice
-        } else if (w != parent) { // Se o vértice adjacente já foi visitado e não é o pai do vértice atual
-            return true; // Encontramos um ciclo, retorna true
+        // SE o vértice adjacente não foi visitado
+        if (!visited[w]) {
+            // realiza uma chamada recursiva para este vértice
+            if (dfsCycleCheck(w, visited, node)) return true;
+        }
+        // SE o vértice adjacente já foi visitado e SE ele não é o pai do vértice atual
+        else if (w != parent) {
+            // CICLO ENCONTRADO
+            return true;
         }
     }
 
+    // CICLO NÃO ENCONTRADO
     return false; 
 }
