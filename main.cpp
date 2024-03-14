@@ -19,9 +19,19 @@ int main() {
     G.addEdge(4, 5);
     G.printAdjList();
     G.printAdjMatrix();
+    CycleDetectionDFS cdDFS_G(G);
+    cdDFS_G.hasCycle();
 
-    CycleDetectionDFS cdDFS(G);
-    cdDFS.hasCycle();
+    Graph H(6);
+    H.addEdge(0, 1);
+    H.addEdge(1, 2);
+    H.addEdge(0, 3);
+    H.addEdge(3, 4);
+    H.addEdge(4, 5);
+    H.printAdjList();
+    H.printAdjMatrix();
+    CycleDetectionDFS cdDFS_H(H);
+    cdDFS_H.hasCycle();
     
     return 0;
 }

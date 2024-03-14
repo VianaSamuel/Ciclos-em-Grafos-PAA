@@ -26,7 +26,7 @@ void CycleDetectionDFS::hasCycle() {
     // ----- DFS ----- //
     // realiza a busca em profundidade a partir do vértice 0, utilizando -1 como vértice-pai
     bool ret = dfsCycleCheck(0, visited, -1);
-    cout << endl << "CycleDetectionDFS:" << endl << "O grafo " << (ret ? "possui" : "não possui") << " ciclo(s)." << endl;
+    cout << endl << "CycleDetectionDFS:" << endl << "O grafo " << (ret ? "possui" : "nao possui") << " ciclo(s)." << endl;
     
     // ----- MEMÓRIA -----//
     // libera a memória alocada para o array
