@@ -1,5 +1,6 @@
 #include "Graph.hpp"
 #include "CycleDetectionDFS.hpp"
+#include "CycleDetection.hpp"
 #include <iostream>
 
 using namespace std;
@@ -32,6 +33,22 @@ int main() {
     H.printAdjMatrix();
     CycleDetectionDFS cdDFS_H(H);
     cdDFS_H.hasCycle();
+
+    int n = 5;
+    CycleDetection cd(n);
+
+    //K5
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            if (i != j) {
+                cd.addEdge(i, j);
+            }
+        }
+    }
+
+    cd.findAllCycles();
+
+    std::cout << "Total cycles found: " << cd.getCycleCount() << std::endl;
     
     return 0;
 }

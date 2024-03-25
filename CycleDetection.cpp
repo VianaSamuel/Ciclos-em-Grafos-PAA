@@ -3,7 +3,6 @@
 #include <algorithm>
 #include <numeric> 
 
-// Construtor da classe CycleDetection inicializa o contador de ciclos e o grafo com um determinado número de vértices, todos desconectados inicialmente.
 CycleDetection::CycleDetection(int n) : cycleCount(0) {
     graph.assign(n, std::vector<bool>(n, false));
 }
@@ -14,7 +13,7 @@ void CycleDetection::addEdge(int u, int v) {
     graph[v][u] = true;
 }
 
-// Método para imprimir um ciclo encontrado.
+// Método para imprimir um ciclo.
 void CycleDetection::printCycle(const std::vector<int>& cycle) {
     for (int v : cycle) {
         std::cout << v << ' ';
@@ -22,13 +21,13 @@ void CycleDetection::printCycle(const std::vector<int>& cycle) {
     std::cout << std::endl;
 }
 
-// Verifica se um determinado subconjunto de vértices forma um ciclo válido no grafo.
+// Analisa se um determinado subconjunto de vértices forma um ciclo válido no grafo.
 bool CycleDetection::isValidCycle(const std::vector<int>& subset) {
     // Verifica se existe uma aresta entre o primeiro e o último vértices do subconjunto.
     if (!graph[subset.front()][subset.back()]) {
         return false;
     }
-    // Verifica se cada par de vértices consecutivos no subconjunto está conectado por uma aresta.
+    // Analisa se cada par de vértices consecutivos no subconjunto está conectado por uma aresta.
     for (size_t i = 0; i < subset.size() - 1; ++i) {
         if (!graph[subset[i]][subset[i + 1]]) {
             return false;
@@ -37,7 +36,7 @@ bool CycleDetection::isValidCycle(const std::vector<int>& subset) {
     return true;
 }
 
-// Verifica todos os subconjuntos de vértices do grafo para encontrar ciclos válidos, excluindo subconjuntos de tamanho menor que 3.
+// Investiga todos os subconjuntos de vértices do grafo para encontrar ciclos válidos, excluindo subconjuntos de tamanho menor que 3.
 void CycleDetection::checkSubsetsForCycles(const std::vector<int>& subset) {
     if (subset.size() < 3) {
         return; // Ignora subconjuntos de tamanho menor que 3 para evitar ciclos triviais.
@@ -53,17 +52,17 @@ void CycleDetection::checkSubsetsForCycles(const std::vector<int>& subset) {
     } while (std::next_permutation(perm.begin(), perm.end()));
 }
 
-// Método público que inicia o processo de detecção de ciclos em todo o grafo.
+//detecção de ciclos
 void CycleDetection::findAllCycles() {
     int n = graph.size();
-    // Cria um vetor de vértices para gerar subconjuntos.
+    // Cria um vetor de vértices para gerar subconjuntos
     std::vector<int> vertices(n);
-    // Preenche o vetor com os números de 0 a n-1.
+    // Preenche o vetor
     std::iota(vertices.begin(), vertices.end(), 0);
 
-    // Gera todos os subconjuntos possíveis de vértices do grafo, de tamanho 2 até n.
+    // Gera todos os subconjuntos possíveis de vértices do grafo
     for (int r = 2; r <= n; ++r) {
-        std::vector<bool> bitmask(r, 1); // Usado para gerar os subconjuntos.
+        std::vector<bool> bitmask(r, 1);
         bitmask.resize(n, 0);
         do {
             std::vector<int> subset;
@@ -72,7 +71,7 @@ void CycleDetection::findAllCycles() {
                     subset.push_back(vertices[i]);
                 }
             }
-            // Verifica se o subconjunto atual forma um ciclo válido.
+            // Verifica se o subconjunto atual forma um ciclo
             checkSubsetsForCycles(subset);
         } while (std::prev_permutation(bitmask.begin(), bitmask.end()));
     }
