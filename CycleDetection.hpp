@@ -2,6 +2,8 @@
 #define CYCLEDETECTION_HPP
 
 #include <vector>
+#include <cmath>
+#include <chrono>
 
 class CycleDetection {
 private:

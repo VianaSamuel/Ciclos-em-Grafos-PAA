@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <numeric>
 #include <chrono>
+#include <cmath>
 
 using namespace std::chrono;
 
