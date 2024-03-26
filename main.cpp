@@ -48,7 +48,7 @@ int main() {
 
     cd.findAllCycles();
 
+    cd.displayOperationCount();
     std::cout << "Total cycles found: " << cd.getCycleCount() << std::endl;
-    
     return 0;
 }
