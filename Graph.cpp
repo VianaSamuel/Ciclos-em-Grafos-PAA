@@ -48,9 +48,9 @@ void Graph::addEdge(int v, int w) {
 // =================== //
 //       PRINT'S       //
 // =================== //
-// ----- LISTA ----- //
+// *** printAdjList *** //
 void Graph::printAdjList() {
-    cout << endl << "LISTA" << endl;
+    cout << "LISTA" << endl;
     cout << "#---#" << endl;
     // VERTICE (chave .first) v //
     for (const auto &pair : adjLst) {
@@ -63,8 +63,7 @@ void Graph::printAdjList() {
     }
     cout << "#---#" << endl;
 }
-
-// ----- MATRIZ ----- //
+// *** printAdjMatrix *** //
 void Graph::printAdjMatrix() {
     cout << endl << "MATRIZ" << endl;
     cout << "#---#  ";
@@ -90,8 +89,7 @@ void Graph::printAdjMatrix() {
 // ==================== //
 //       GETTER'S       //
 // ==================== //
-// ----- GET V ----- //
+// *** getV *** //
 int Graph::getV() const { return this->V; }
-
-// ----- GET LISTA ----- //
+// *** getAdjLst *** //
 const map<int, vector<int>>& Graph::getAdjLst() const { return this->adjLst; }

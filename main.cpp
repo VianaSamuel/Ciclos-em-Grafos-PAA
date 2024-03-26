@@ -1,11 +1,17 @@
 #include "Graph.hpp"
 #include "CycleDetectionDFS.hpp"
-#include "CycleDetection.hpp"
+#include "CycleDetectionPermutation.hpp"
 #include <iostream>
 
 using namespace std;
 
 int main() {
+    cout << "====" << endl;
+    cout << "DFS:" << endl;
+    cout << "====" << endl;
+    cout << "--------" << endl;
+    cout << "Grafo G:" << endl;
+    cout << "--------" << endl;
     Graph G(6);
     G.addEdge(0, 1);
     G.addEdge(0, 3);
@@ -22,7 +28,11 @@ int main() {
     G.printAdjMatrix();
     CycleDetectionDFS cdDFS_G(G);
     cdDFS_G.hasCycle();
+    cout << endl << endl;
 
+    cout << "--------" << endl;
+    cout << "Grafo H:" << endl;
+    cout << "--------" << endl;
     Graph H(6);
     H.addEdge(0, 1);
     H.addEdge(1, 2);
@@ -33,22 +43,27 @@ int main() {
     H.printAdjMatrix();
     CycleDetectionDFS cdDFS_H(H);
     cdDFS_H.hasCycle();
+    cout << endl << endl;
 
+
+    cout << "===========" << endl;
+    cout << "PERMUTACAO:" << endl;
+    cout << "===========" << endl;
+    cout << "--------" << endl;
+    cout << "Grafo I:" << endl;
+    cout << "--------" << endl;
     int n = 5;
-    CycleDetection cd(n);
-
-    //K5
+    CycleDetectionPermutation cdP(n);
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < n; ++j) {
             if (i != j) {
-                cd.addEdge(i, j);
+                cdP.addEdge(i, j);
             }
         }
     }
-
-    cd.findAllCycles();
-
-    cd.displayOperationCount();
-    std::cout << "Total cycles found: " << cd.getCycleCount() << std::endl;
+    cdP.findAllCycles();
+    cdP.displayOperationCount();
+    cout << "Quantidade total de ciclos encontrada: " << cdP.getCycleCount() << endl;
+    
     return 0;
 }

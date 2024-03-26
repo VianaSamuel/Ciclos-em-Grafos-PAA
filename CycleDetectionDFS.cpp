@@ -16,10 +16,9 @@ CycleDetectionDFS::CycleDetectionDFS(const Graph& G) : G(G) { }
 // ==================== //
 void CycleDetectionDFS::hasCycle() {
     // ----- INICIALIZAÇÃO ----- //
-    // obtém o número de vértices do grafo, cria um array de vértices visitados e os inicializa como não visitados
-    int V = G.getV();
-    bool *visited = new bool[V];
-    for (int v = 0; v < V; v++) {
+    int V = G.getV();               // obtém o número de vértices do grafo
+    bool *visited = new bool[V];    // cria um array de vértices visitados
+    for (int v = 0; v < V; v++) {   // inicializa os vértices do array como não visitados
         visited[v] = false;
     }
 
@@ -39,25 +38,19 @@ void CycleDetectionDFS::hasCycle() {
 // =============== //
 bool CycleDetectionDFS::dfsCycleCheck(int node, bool *visited, int parent) {
     // ----- INICIALIZAÇÃO ----- //
-    // obtém a lista de adjacência do grafo e marca o vértice atual como visitado
-    map<int, vector<int>> adjLst = G.getAdjLst();
-    visited[node] = true;
+    map<int, vector<int>> adjLst = G.getAdjLst();   // obtém a lista de adjacência do grafo
+    visited[node] = true;                           // marca o vértice atual como visitado
 
     // ----- ITERAÇÃO ----- //
     // itera sobre todos os vértices adjacentes ao vértice atual
     for (const auto& w : adjLst.at(node)) {
-        // SE o vértice adjacente não foi visitado
-        if (!visited[w]) {
-            // realiza uma chamada recursiva para este vértice
-            if (dfsCycleCheck(w, visited, node)) return true;
+        if (!visited[w]) {                                      // SE o vértice adjacente não foi visitado
+            if (dfsCycleCheck(w, visited, node)) return true;   // realiza uma chamada recursiva para este vértice
         }
-        // SE o vértice adjacente já foi visitado e SE ele não é o pai do vértice atual
-        else if (w != parent) {
-            // CICLO ENCONTRADO
-            return true;
+        else if (w != parent) { // SE o vértice adjacente já foi visitado e SE ele não é o pai do vértice atual
+            return true;        // CICLO ENCONTRADO
         }
     }
 
-    // CICLO NÃO ENCONTRADO
-    return false; 
+    return false;   // CICLO NÃO ENCONTRADO
 }
