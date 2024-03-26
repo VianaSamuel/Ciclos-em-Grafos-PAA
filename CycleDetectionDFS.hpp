@@ -7,11 +7,12 @@ using namespace std;
 
 class CycleDetectionDFS {
     const Graph& G;
+    int cycleCount;
 
 public:
     CycleDetectionDFS(const Graph& G);
-    void hasCycle();
-    bool dfsCycleCheck(int node, bool *visited, int parent);
+    bool hasCycle();
+    bool dfsCycleCheck(const map<int, vector<int>>& adjLst, vector<int>& visited, int curr);
 };
 
 #endif
