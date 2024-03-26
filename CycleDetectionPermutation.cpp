@@ -26,7 +26,7 @@ void CycleDetectionPermutation::addEdge(int u, int v) {
 // ==================== //
 //       DETECÇÃO       //
 // ==================== //
-// *** findAllCycles *** //
+// # findAllCycles
 void CycleDetectionPermutation::findAllCycles() {
     // ----- INICIALIZAÇÃO ----- //
     auto start = high_resolution_clock::now();      // inicializa o cronômetro
@@ -62,7 +62,7 @@ void CycleDetectionPermutation::findAllCycles() {
     auto duration = duration_cast<milliseconds>(stop - start);  // calcula a duração
     displayExecutionTime(duration);                             // exibe o tempo de execução
 }
-// *** isValidCycle *** //
+// # isValidCycle
 bool CycleDetectionPermutation::isValidCycle(const std::vector<int>& subset) {
     operationCount++; // (verificação do tamanho do subgrafo)
 
@@ -87,7 +87,7 @@ bool CycleDetectionPermutation::isValidCycle(const std::vector<int>& subset) {
 // ====================== //
 //       PERMUTAÇÃO       //
 // ====================== //
-// *** checkSubsetsForCycles *** //
+// # checkSubsetsForCycles
 // investiga todos os subconjuntos de vértices do grafo para encontrar ciclos válidos, excluindo subconjuntos de tamanho menor que 3
 void CycleDetectionPermutation::checkSubsetsForCycles(const std::vector<int>& subset) {
     operationCount++; // (verificação de tamanho do subset)
@@ -113,18 +113,18 @@ void CycleDetectionPermutation::checkSubsetsForCycles(const std::vector<int>& su
 // =================== //
 //       PRINT'S       //
 // =================== //
-// *** printCycle *** //
+// # printCycle
 void CycleDetectionPermutation::printCycle(const std::vector<int>& cycle) {
     for (int v : cycle) {
         std::cout << v << ' ';
     }
     std::cout << std::endl;
 }
-// *** displayExecutionTime *** //
+// # displayExecutionTime
 void CycleDetectionPermutation::displayExecutionTime(const std::chrono::milliseconds& duration) {
     std::cout << "Tempo de execucao: " << duration.count() << "ms" << std::endl;
 }
-// *** displayOperationCount *** //
+// # displayOperationCount
 void CycleDetectionPermutation::displayOperationCount() const {
     std::cout << "Contagem de operacoes: " << operationCount << std::endl;
 }
@@ -133,7 +133,7 @@ void CycleDetectionPermutation::displayOperationCount() const {
 // ==================== //
 //       GETTER'S       //
 // ==================== //
-// *** getCycleCount *** //
+// # getCycleCount
 int CycleDetectionPermutation::getCycleCount() const {
-    return cycleCount;  // retorna o número total de ciclos válidos encontrados no grafo
+    return cycleCount; // retorna o número total de ciclos válidos encontrados no grafo
 }
