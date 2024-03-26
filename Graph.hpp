@@ -14,10 +14,10 @@ class Graph {
 public:
     Graph(int V);
     void addEdge(int v, int w);
-    void printAdjList();
-    void printAdjMatrix();
+    void printGraph();
     int getV() const;
     const map<int, std::vector<int>>& getAdjLst() const;
+    const vector<vector<bool>> &getAdjMtx() const;
 };
 
 #endif

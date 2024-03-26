@@ -24,8 +24,7 @@ int main() {
     G.addEdge(2, 5);
     G.addEdge(3, 5);
     G.addEdge(4, 5);
-    G.printAdjList();
-    G.printAdjMatrix();
+    G.printGraph();
     CycleDetectionDFS cdDFS_G(G);
     cdDFS_G.hasCycle();
     cout << endl << endl;
@@ -39,8 +38,7 @@ int main() {
     H.addEdge(0, 3);
     H.addEdge(3, 4);
     H.addEdge(4, 5);
-    H.printAdjList();
-    H.printAdjMatrix();
+    H.printGraph();
     CycleDetectionDFS cdDFS_H(H);
     cdDFS_H.hasCycle();
     cout << endl << endl;

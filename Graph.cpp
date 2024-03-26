@@ -7,18 +7,16 @@ using namespace std;
 //       CONSTRUTOR       //
 // ====================== //
 Graph::Graph(int V) {
-    // ----- VERTICES ----- //
-    // inicializa o numero de vertices
-    this->V = V;
+    this->V = V;    // inicializa o número de vértices
 
     // ----- LISTA ----- //
-    // inicializa a lista de adjacencia, onde:
-    // chave = vertice
-    // valor = lista de vertices adjacentes
+    // inicializa a lista de adjacência, onde:
+    // chave = vértice
+    // valor = lista de vértices adjacentes
     adjLst = map<int, vector<int>>();
 
     // ----- MATRIZ ----- //
-    // inicializa a matriz de adjacencia, onde:
+    // inicializa a matriz de adjacência, onde:
     // linhas = V elementos
     // colunas = V elementos inicializados como false
     adjMtx.resize(V, vector<bool>(V, false));
@@ -48,36 +46,35 @@ void Graph::addEdge(int v, int w) {
 // =================== //
 //       PRINT'S       //
 // =================== //
-// *** printAdjList *** //
-void Graph::printAdjList() {
+// # printGraph
+void Graph::printGraph() {
+    // ----- LISTA ----- //
     cout << "LISTA" << endl;
     cout << "#---#" << endl;
-    // VERTICE (chave .first) v //
+    // VÉRTICE (chave .first) v
     for (const auto &pair : adjLst) {
         cout << "| " << pair.first << " |-> ";
-        // LISTA (valor .second) DE ADJACENTES w //
+        // LISTA DE ADJACENTES (valor .second) w
         for (int w : pair.second) {
             cout << w << " ";
         }
         cout << endl;
     }
     cout << "#---#" << endl;
-}
-// *** printAdjMatrix *** //
-void Graph::printAdjMatrix() {
+
+    // ----- MATRIZ ----- //
     cout << endl << "MATRIZ" << endl;
     cout << "#---#  ";
     for (int i=0; i<V; ++i) {
         cout << " " << i;
     }
     cout << endl;
-    
-    // VERTICE (linha) v //
+    // VÉRTICE (linha) v
     for (int v=0; v<V; ++v) {
         cout << "| " << v << " |-> ";
-        // VERTICE (coluna) u //
+        // VÉRTICE (coluna) u
         for (int u=0; u<V; ++u) {
-            // CONEXAO ENTRE v E u ? //
+            // CONEXAO ENTRE v E u ?
             cout << (adjMtx[v][u] ? "1 " : "0 ");
         }
         cout << endl;
@@ -89,7 +86,9 @@ void Graph::printAdjMatrix() {
 // ==================== //
 //       GETTER'S       //
 // ==================== //
-// *** getV *** //
+// # getV
 int Graph::getV() const { return this->V; }
-// *** getAdjLst *** //
+// # getAdjLst
 const map<int, vector<int>>& Graph::getAdjLst() const { return this->adjLst; }
+// # getAdjMtx
+const vector<vector<bool>>& Graph::getAdjMtx() const { return this->adjMtx; }
