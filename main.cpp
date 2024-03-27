@@ -27,6 +27,10 @@ int main() {
     G.printGraph();
     CycleDetectionDFS cdDFS_G(G);
     cdDFS_G.hasCycle();
+
+    cdDFS_G.hasCycle(); // Executa a detecção de ciclos
+    cdDFS_G.printCycleCount();
+    
     cout << endl << endl;
 
     cout << "--------" << endl;
@@ -40,7 +44,10 @@ int main() {
     H.addEdge(4, 5);
     H.printGraph();
     CycleDetectionDFS cdDFS_H(H);
-    cdDFS_H.hasCycle();
+
+    cdDFS_G.hasCycle(); // Executa a detecção de ciclos
+    cdDFS_G.printCycleCount();
+
     cout << endl << endl;
 
 

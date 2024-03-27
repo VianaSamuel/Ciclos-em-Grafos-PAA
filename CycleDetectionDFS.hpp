@@ -1,18 +1,22 @@
-#ifndef CYCLEDETECTIONDFS_HPP
-#define CYCLEDETECTIONDFS_HPP
+#ifndef CYCLE_DETECTION_DFS_HPP
+#define CYCLE_DETECTION_DFS_HPP
 
 #include "Graph.hpp"
-
-using namespace std;
+#include <map>
+#include <vector>
 
 class CycleDetectionDFS {
+private:
     const Graph& G;
     int cycleCount;
+    std::vector<std::vector<int>> cycles;
 
 public:
     CycleDetectionDFS(const Graph& G);
     bool hasCycle();
-    bool dfsCycleCheck(const map<int, vector<int>>& adjLst, vector<int>& visited, int curr);
+    bool dfsCycleCheck(const std::map<int, std::vector<int>> &adjLst, std::vector<int> &visited, int v, int parent);
+    void printCycleCount() const;
+    void printCycles() const;
 };
 
-#endif
+#endif // CYCLE_DETECTION_DFS_HPP
