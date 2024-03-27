@@ -1,54 +1,68 @@
-#include "CycleDetectionDFS.hpp"
 #include "Graph.hpp"
-#include <iostream>
+#include "CycleDetectionDFS.hpp" 
+#include <iostream> 
+
+using namespace std;
 
 // ====================== //
 //       CONSTRUTOR       //
 // ====================== //
 // inicializa o CycleDetectionDFS com um grafo fornecido
-CycleDetectionDFS::CycleDetectionDFS(const Graph& G) : G(G), cycleCount(0) {}
+CycleDetectionDFS::CycleDetectionDFS(const Graph& G) : G(G), cycleCount(0) { }
 
 
 // ==================== //
 //       DETECÇÃO       //
 // ==================== //
 bool CycleDetectionDFS::hasCycle() {
-    std::map<int, std::vector<int>> adjLst = G.getAdjLst();// obtém a lista de adjacência do grafo.
-    int V = G.getV(); //obtém o número de vértices no grafo.
-    std::vector<int> visited(V, 0);// cria um vetor para marcar os vértices visitados.
+    // ----- INICIALIZAÇÃO ----- //
+    map<int, vector<int>> adjLst = G.getAdjLst();   // obtém a lista de adjacência do grafo
+    int V = G.getV();                               // obtém o número de vértices do grafo
+    vector<int> visited (V, 0);                     // cria um array de vértices visitados
+    bool FLAG = false;                              // flag pra indicar ciclos
 
-    for (int v = 0; v < V; ++v) {
-        //se o vértice atual não foi visitado, inicia uma busca DFS a partir dele.
-        if (!visited[v]) {
-            dfsCycleCheck(adjLst, visited, v, -1);
+    // VÉRTICE (chave .first) v
+    for (const auto &pair : adjLst) {
+        int v = pair.first;
+        visited[v] = 1; // marca o vértice atual como visitado
+        
+        // LISTA DE ADJACENTES (valor .second) w
+        for (int w : pair.second) {
+            FLAG = dfsCycleCheck(adjLst, visited, w);
+            if (FLAG) {
+                return true; // CICLO ENCONTRADO
+            }
         }
+        
+        visited[v] = 0; // reseta a marcação do vértice atual
     }
-    return cycleCount > 0;
+    
+    return false; // CICLO NÃO ENCONTRADO
 }
+
 
 // =============== //
 //       DFS       //
 // =============== //
-bool CycleDetectionDFS::dfsCycleCheck(const std::map<int, std::vector<int>>& adjLst, std::vector<int>& visited, int v, int parent) {
-    //marca o vértice atual como visitado.
-    visited[v] = 1;
+bool CycleDetectionDFS::dfsCycleCheck(const map<int, vector<int>>& adjLst, vector<int>& visited, int v) {
+    bool FLAG = false;
 
-    //itera sobre todos os vértices adjacentes ao vértice atual.
+    if (visited[v] == 2) {  // SE o vértice ATUAL já foi visitado e está marcado como parte de um possível ciclo
+        return true;        // CICLO ENCONTRADO
+    }
+    
+    visited[v] = 1; // marca o vértice atual como visitado
+    
     for (int w : adjLst.at(v)) {
-        //se o vértice adjacente não foi visitado, realiza uma busca DFS recursivamente a partir dele.
-        if (!visited[w]) {
-            dfsCycleCheck(adjLst, visited, w, v);
-        }
-        //se o vértice adjacente já foi visitado e não é o pai do vértice atual, um ciclo foi encontrado.
-        else if (w != parent) {
-            cycleCount++;
+        if (visited[w] == 1) {  // SE o vértice ADJACENTE já foi visitado
+            visited[w] = 2;     // o marca como parte de um possível ciclo
+        } else {
+            FLAG = dfsCycleCheck(adjLst, visited, w); // explora adjacentes recursivamente
+            if (FLAG) {
+                return true; // CICLO ENCONTRADO
+            }
         }
     }
-
-
-    return false; 
-}
-
-void CycleDetectionDFS::printCycleCount() const {
-    std::cout << "Número de ciclos detectados: " << cycleCount / 2 << std::endl;
+    
+    return false; // CICLO NÃO ENCONTRADO
 }
