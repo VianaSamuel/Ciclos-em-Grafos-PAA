@@ -1,26 +1,13 @@
 #include "CycleDetectionPermutation.hpp"
 #include <iostream>
-#include <algorithm>
-#include <numeric>
-#include <chrono>
-#include <cmath>
 
 using namespace std::chrono;
 
 // ====================== //
 //       CONSTRUTOR       //
 // ====================== //
-// inicializa o CycleDetectionPermutation com o número de vértices
-CycleDetectionPermutation::CycleDetectionPermutation(int n) : cycleCount(0), operationCount(0) {
-    graph.assign(n, std::vector<bool>(n, false));
-    operationCount += n * n; // contagem de atribuições na matriz de adjacência
-}
-// método para adicionar uma aresta
-void CycleDetectionPermutation::addEdge(int u, int v) {
-    graph[u][v] = true;
-    graph[v][u] = true;
-    operationCount += 2; // (duas atribuições)
-}
+// inicializa o CycleDetectionPermutation com um grafo fornecido
+CycleDetectionPermutation::CycleDetectionPermutation(const Graph& G) : G(G), cycleCount(0), operationCount(0) { }
 
 
 // ==================== //
@@ -30,19 +17,20 @@ void CycleDetectionPermutation::addEdge(int u, int v) {
 void CycleDetectionPermutation::findAllCycles() {
     // ----- INICIALIZAÇÃO ----- //
     auto start = high_resolution_clock::now();      // inicializa o cronômetro
-    int n = graph.size();                           // inicializa o número de vértices
-    std::vector<int> vertices(n);                   // inicializa um vetor de vértices para gerar subconjuntos
-    std::iota(vertices.begin(), vertices.end(), 0); // preenche o vetor
+    int n = G.getV();                               // obtém o número de vértices do grafo
+    vector<vector<bool>> adjMtx = G.getAdjMtx();    // obtém a matriz de adjacência do grafo
+    vector<int> vertices(n);                        // inicializa um vetor de vértices para gerar subconjuntos
+    iota(vertices.begin(), vertices.end(), 0);      // preenche o vetor
     operationCount += n;                            // adiciona à contagem de operações
 
     // ----- SUBCONJUNTOS -----//
     // gera todos os subconjuntos de vértices possíveis do grafo
     for (int r = 2; r <= n; ++r) {
-        std::vector<bool> bitmask(r, 1);
+        vector<bool> bitmask(r, 1);
         bitmask.resize(n, 0);
 
         do {
-            std::vector<int> subset;
+            vector<int> subset;
             for (int i = 0; i < n; ++i) {
                 operationCount++; // loop
                 if (bitmask[i]) {
@@ -51,24 +39,27 @@ void CycleDetectionPermutation::findAllCycles() {
                 }
             }
             // verifica se o subconjunto atual forma um ciclo
-            checkSubsetsForCycles(subset);
-        } while (std::prev_permutation(bitmask.begin(), bitmask.end()));
+            checkSubsetsForCycles(subset, adjMtx);
+        } while (prev_permutation(bitmask.begin(), bitmask.end()));
         
         operationCount++;
     }
 
+    // ----- PRINT ----- //
+    cout << "Total de ciclos: " << cycleCount << endl;
+
     // ----- FINALIZAÇÃO ----- //
     auto stop = high_resolution_clock::now();                   // interrompe o cronômetro
     auto duration = duration_cast<milliseconds>(stop - start);  // calcula a duração
-    std::cout << "Tempo de execucao: " << duration.count() << "ms" << std::endl;
-    std::cout << "Contagem de operacoes: " << operationCount << std::endl;
+    cout << "Tempo de execucao: " << duration.count() << "ms" << endl;
+    cout << "Contagem de operacoes: " << operationCount << endl << endl << endl;
 }
 // # isValidCycle
-bool CycleDetectionPermutation::isValidCycle(const std::vector<int>& subset) {
+bool CycleDetectionPermutation::isValidCycle(const vector<int>& subset, vector<vector<bool>>& adjMtx) {
     operationCount++; // (verificação do tamanho do subgrafo)
 
     // verifica se existe uma aresta entre o primeiro e o último vértices do subconjunto
-    if (!graph[subset.front()][subset.back()]) {
+    if (!adjMtx[subset.front()][subset.back()]) {
         operationCount += 2; // (acesso ao vetor e comparação)
         return false;
     }
@@ -76,7 +67,7 @@ bool CycleDetectionPermutation::isValidCycle(const std::vector<int>& subset) {
     // analisa se cada par de vértices consecutivos no subconjunto está conectado por uma aresta
     for (size_t i = 0; i < subset.size() - 1; ++i) {
         operationCount += 3; // (acesso ao vetor (2) + comparação)
-        if (!graph[subset[i]][subset[i + 1]]) {
+        if (!adjMtx[subset[i]][subset[i + 1]]) {
             return false;
         }
     }
@@ -90,24 +81,24 @@ bool CycleDetectionPermutation::isValidCycle(const std::vector<int>& subset) {
 // ====================== //
 // # checkSubsetsForCycles
 // investiga todos os subconjuntos de vértices do grafo para encontrar ciclos válidos, excluindo subconjuntos de tamanho menor que 3
-void CycleDetectionPermutation::checkSubsetsForCycles(const std::vector<int>& subset) {
+void CycleDetectionPermutation::checkSubsetsForCycles(const vector<int>& subset, vector<vector<bool>>& adjMtx) {
     operationCount++; // (verificação de tamanho do subset)
     if (subset.size() < 3) {
         return;
     }
     
     // cria uma cópia do subconjunto para permutar e encontrar todos os ciclos possíveis
-    std::vector<int> perm = subset;
-    std::sort(perm.begin(), perm.end());
-    operationCount += perm.size() * log(perm.size()); // (estimativa para std::sort)
+    vector<int> perm = subset;
+    sort(perm.begin(), perm.end());
+    operationCount += perm.size() * log(perm.size()); // (estimativa para sort)
     do {
-        if (isValidCycle(perm)) {   // analisa se um determinado subconjunto de vértices forma um ciclo válido no grafo
+        if (isValidCycle(perm, adjMtx)) {   // analisa se um determinado subconjunto de vértices forma um ciclo válido no grafo
             cycleCount++;
             printCycle(perm);
             operationCount++;
         }
         operationCount++; // (próxima permutação)
-    } while (std::next_permutation(perm.begin(), perm.end()));
+    } while (next_permutation(perm.begin(), perm.end()));
 }
 
 
@@ -115,18 +106,9 @@ void CycleDetectionPermutation::checkSubsetsForCycles(const std::vector<int>& su
 //       PRINT'S       //
 // =================== //
 // # printCycle
-void CycleDetectionPermutation::printCycle(const std::vector<int>& cycle) {
+void CycleDetectionPermutation::printCycle(const vector<int>& cycle) {
     for (int v : cycle) {
-        std::cout << v << ' ';
+        cout << v << ' ';
     }
-    std::cout << std::endl;
-}
-
-
-// ==================== //
-//       GETTER'S       //
-// ==================== //
-// # getCycleCount
-int CycleDetectionPermutation::getCycleCount() const {
-    return cycleCount; // retorna o número total de ciclos válidos encontrados no grafo
+    cout << endl;
 }
