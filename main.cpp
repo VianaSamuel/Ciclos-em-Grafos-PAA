@@ -6,9 +6,7 @@
 using namespace std;
 
 int main() {
-    cout << "=======" << endl;
-    cout << "Grafo G -> (DFS)" << endl;
-    cout << "=======" << endl;
+    // Grafo G
     Graph G(6);
     G.addEdge(0, 1);
     G.addEdge(0, 3);
@@ -21,40 +19,78 @@ int main() {
     G.addEdge(2, 5);
     G.addEdge(3, 5);
     G.addEdge(4, 5);
+    cout << "=======" << endl;
+    cout << "Grafo G" << endl;
+    cout << "=======" << endl;
     G.printGraph();
-    CycleDetectionDFS cdDFS_G(G);
-    cdDFS_G.findAllUniqueCycles();
-    cout << endl << endl;
 
-    cout << "=======" << endl;
-    cout << "Grafo H -> (DFS)" << endl;
-    cout << "=======" << endl;
+    // Grafo H
     Graph H(6);
     H.addEdge(0, 1);
     H.addEdge(1, 2);
     H.addEdge(0, 3);
     H.addEdge(3, 4);
     H.addEdge(4, 5);
+    cout << "=======" << endl;
+    cout << "Grafo H" << endl;
+    cout << "=======" << endl;
     H.printGraph();
-    CycleDetectionDFS cdDFS_H(H);
-    cdDFS_H.findAllUniqueCycles();
-    cout << endl << endl;
 
-
-    cout << "========" << endl;
-    cout << "Grafo K5 -> (PERMUTACAO)" << endl;
-    cout << "========" << endl;
-    int n = 5;
-    CycleDetectionPermutation cdP(n);
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < n; ++j) {
+    // Grafo K5
+    Graph K5(5);
+    for (int i = 0; i < 5; ++i) {
+        for (int j = 0; j < 5; ++j) {
             if (i != j) {
-                cdP.addEdge(i, j);
+                K5.addEdge(i, j);
             }
         }
     }
-    cdP.findAllCycles();
-    cout << "Quantidade total de ciclos encontrada: " << cdP.getCycleCount() << endl;
+    cout << "========" << endl;
+    cout << "Grafo K5" << endl;
+    cout << "========" << endl;
+    K5.printGraph();
+
+
+    // PERMUTAÇÃO
+    cout << "##########" << endl;
+    cout << "PERMUTACAO" << endl;
+    cout << "##########" << endl;
+    CycleDetectionPermutation cdP_G(G);
+    CycleDetectionPermutation cdP_H(H);
+    CycleDetectionPermutation cdP_K5(K5);
+    cout << "-------" << endl;
+    cout << "Grafo G" << endl;
+    cout << "-------" << endl;
+    cdP_G.findAllCycles();
+    cout << "-------" << endl;
+    cout << "Grafo H" << endl;
+    cout << "-------" << endl;
+    cdP_H.findAllCycles();
+    cout << "--------" << endl;
+    cout << "Grafo K5" << endl;
+    cout << "--------" << endl;
+    cdP_K5.findAllCycles();
+
+
+    // CAMINHAMENTO
+    cout << "############" << endl;
+    cout << "CAMINHAMENTO" << endl;
+    cout << "############" << endl;
+    CycleDetectionDFS cdDFS_G(G);
+    CycleDetectionDFS cdDFS_H(H);
+    CycleDetectionDFS cdDFS_K5(K5);
+    cout << "-------" << endl;
+    cout << "Grafo G" << endl;
+    cout << "-------" << endl;
+    cdDFS_G.findAllUniqueCycles();
+    cout << "-------" << endl;
+    cout << "Grafo H" << endl;
+    cout << "-------" << endl;
+    cdDFS_H.findAllUniqueCycles();
+    cout << "--------" << endl;
+    cout << "Grafo K5" << endl;
+    cout << "--------" << endl;
+    cdDFS_K5.findAllUniqueCycles();
     
     return 0;
 }
