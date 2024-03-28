@@ -6,9 +6,9 @@
 using namespace std;
 
 int main() {
-    cout << "-------" << endl;
+    cout << "=======" << endl;
     cout << "Grafo G -> (DFS)" << endl;
-    cout << "-------" << endl;
+    cout << "=======" << endl;
     Graph G(6);
     G.addEdge(0, 1);
     G.addEdge(0, 3);
@@ -26,9 +26,9 @@ int main() {
     cdDFS_G.findAllUniqueCycles();
     cout << endl << endl;
 
-    cout << "-------" << endl;
+    cout << "=======" << endl;
     cout << "Grafo H -> (DFS)" << endl;
-    cout << "-------" << endl;
+    cout << "=======" << endl;
     Graph H(6);
     H.addEdge(0, 1);
     H.addEdge(1, 2);
@@ -41,9 +41,9 @@ int main() {
     cout << endl << endl;
 
 
-    cout << "--------" << endl;
+    cout << "========" << endl;
     cout << "Grafo K5 -> (PERMUTACAO)" << endl;
-    cout << "--------" << endl;
+    cout << "========" << endl;
     int n = 5;
     CycleDetectionPermutation cdP(n);
     for (int i = 0; i < n; ++i) {
