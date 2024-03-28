@@ -20,8 +20,6 @@ public:
     void addEdge(int u, int v);
     void findAllCycles();
     int getCycleCount() const;
-    void displayExecutionTime(const std::chrono::milliseconds& duration);
-    void displayOperationCount() const;
 };
 
 #endif

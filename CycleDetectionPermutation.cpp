@@ -60,7 +60,8 @@ void CycleDetectionPermutation::findAllCycles() {
     // ----- FINALIZAÇÃO ----- //
     auto stop = high_resolution_clock::now();                   // interrompe o cronômetro
     auto duration = duration_cast<milliseconds>(stop - start);  // calcula a duração
-    displayExecutionTime(duration);                             // exibe o tempo de execução
+    std::cout << "Tempo de execucao: " << duration.count() << "ms" << std::endl;
+    std::cout << "Contagem de operacoes: " << operationCount << std::endl;
 }
 // # isValidCycle
 bool CycleDetectionPermutation::isValidCycle(const std::vector<int>& subset) {
@@ -119,14 +120,6 @@ void CycleDetectionPermutation::printCycle(const std::vector<int>& cycle) {
         std::cout << v << ' ';
     }
     std::cout << std::endl;
-}
-// # displayExecutionTime
-void CycleDetectionPermutation::displayExecutionTime(const std::chrono::milliseconds& duration) {
-    std::cout << "Tempo de execucao: " << duration.count() << "ms" << std::endl;
-}
-// # displayOperationCount
-void CycleDetectionPermutation::displayOperationCount() const {
-    std::cout << "Contagem de operacoes: " << operationCount << std::endl;
 }
 
 
