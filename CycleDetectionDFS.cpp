@@ -1,7 +1,5 @@
-#include "Graph.hpp"
 #include "CycleDetectionDFS.hpp" 
 #include <iostream>
-#include <chrono>
 
 using namespace std::chrono;
 
@@ -35,19 +33,18 @@ int CycleDetectionDFS::findAllUniqueCycles() {
     }
 
     // ----- PRINT ----- //
-    cout << "Total de ciclos unicos: " << uniqueCycles.size() << endl;
     if (uniqueCycles.size() != 0) {
-        cout << "Ciclos encontrados:" << endl;
         for (const string& cycle : uniqueCycles) {
             cout << cycle << endl;
         }
     }
+    cout << "Total de ciclos unicos: " << uniqueCycles.size() << endl;
 
     // ----- FINALIZAÇÃO ----- //
     auto stop = high_resolution_clock::now();                   // interrompe o cronômetro
     auto duration = duration_cast<milliseconds>(stop - start);  // calcula a duração
     cout << "Tempo de execucao: " << duration.count() << "ms" << endl;
-    cout << "Contagem de operacoes: " << operationCount << endl;
+    cout << "Contagem de operacoes: " << operationCount << endl << endl << endl;
     return uniqueCycles.size();                                 // retorna o resultado
 }
 

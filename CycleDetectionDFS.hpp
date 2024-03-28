@@ -2,6 +2,11 @@
 #define CYCLEDETECTIONDFS_HPP
 
 #include "Graph.hpp"
+#include <set>
+#include <vector>
+#include <chrono>
+#include <map>
+#include <algorithm>
 
 using namespace std;
 
