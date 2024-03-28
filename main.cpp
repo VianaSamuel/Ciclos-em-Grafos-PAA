@@ -6,12 +6,9 @@
 using namespace std;
 
 int main() {
-    cout << "====" << endl;
-    cout << "DFS:" << endl;
-    cout << "====" << endl;
-    cout << "--------" << endl;
-    cout << "Grafo G:" << endl;
-    cout << "--------" << endl;
+    cout << "-------" << endl;
+    cout << "Grafo G -> (DFS)" << endl;
+    cout << "-------" << endl;
     Graph G(6);
     G.addEdge(0, 1);
     G.addEdge(0, 3);
@@ -26,12 +23,12 @@ int main() {
     G.addEdge(4, 5);
     G.printGraph();
     CycleDetectionDFS cdDFS_G(G);
-    cdDFS_G.hasCycle();
+    cdDFS_G.findAllUniqueCycles();
     cout << endl << endl;
 
-    cout << "--------" << endl;
-    cout << "Grafo H:" << endl;
-    cout << "--------" << endl;
+    cout << "-------" << endl;
+    cout << "Grafo H -> (DFS)" << endl;
+    cout << "-------" << endl;
     Graph H(6);
     H.addEdge(0, 1);
     H.addEdge(1, 2);
@@ -40,15 +37,12 @@ int main() {
     H.addEdge(4, 5);
     H.printGraph();
     CycleDetectionDFS cdDFS_H(H);
-    cdDFS_H.hasCycle();
+    cdDFS_H.findAllUniqueCycles();
     cout << endl << endl;
 
 
-    cout << "===========" << endl;
-    cout << "PERMUTACAO:" << endl;
-    cout << "===========" << endl;
     cout << "--------" << endl;
-    cout << "Grafo I:" << endl;
+    cout << "Grafo K5 -> (PERMUTACAO)" << endl;
     cout << "--------" << endl;
     int n = 5;
     CycleDetectionPermutation cdP(n);
@@ -60,7 +54,6 @@ int main() {
         }
     }
     cdP.findAllCycles();
-    cdP.displayOperationCount();
     cout << "Quantidade total de ciclos encontrada: " << cdP.getCycleCount() << endl;
     
     return 0;
