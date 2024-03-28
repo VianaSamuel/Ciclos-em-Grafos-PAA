@@ -67,7 +67,7 @@ void Graph::printGraph() {
     cout << "#---#" << endl;
 
     // ----- MATRIZ ----- //
-    cout << endl << "MATRIZ" << endl;
+    cout << "MATRIZ" << endl;
     cout << "#---#  ";
     for (int i=0; i<V; ++i) {
         cout << " " << i;
@@ -83,7 +83,7 @@ void Graph::printGraph() {
         }
         cout << endl;
     }
-    cout << "#---#" << endl << endl;
+    cout << "#---#" << endl << endl << endl;
 }
 
 
