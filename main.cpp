@@ -37,9 +37,10 @@ int main() {
     H.printGraph();
 
     // Grafo K5
-    Graph K5(5);
-    for (int i = 0; i < 5; ++i) {
-        for (int j = 0; j < 5; ++j) {
+    int k = 5;
+    Graph K5(k);
+    for (int i = 0; i < k; ++i) {
+        for (int j = 0; j < k; ++j) {
             if (i != j) {
                 K5.addEdge(i, j);
             }
