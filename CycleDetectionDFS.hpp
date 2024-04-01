@@ -17,7 +17,7 @@ class CycleDetectionDFS {
 public:
     CycleDetectionDFS(const Graph& G);
     int findAllUniqueCycles();
-    void DFS(int v, vector<bool> &visited, int start, vector<int> &path, set<string> &uniqueCycles, const map<int, vector<int>>& adjLst);
+    void DFS(int v, vector<bool>& visited, int start, vector<int>& path, set<vector<int>>& uniqueCycles, const map<int, vector<int>>& adjLst);
     string createCycleKey(const vector<int>& cycle);
 };
 
