@@ -89,8 +89,6 @@ void CycleDetectionPermutation::checkSubsetsForCycles(const vector<int>& subset,
     
     // cria uma cópia do subconjunto para permutar e encontrar todos os ciclos possíveis
     vector<int> perm = subset;
-    sort(perm.begin(), perm.end());
-    operationCount += perm.size() * log(perm.size()); // (estimativa para sort)
     do {
         if (isValidCycle(perm, adjMtx)) {   // analisa se um determinado subconjunto de vértices forma um ciclo válido no grafo
             cycleCount++;
