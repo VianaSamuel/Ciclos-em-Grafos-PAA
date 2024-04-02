@@ -46,7 +46,7 @@ void CycleDetectionPermutation::findAllCycles() {
     // ----- FINALIZAÇÃO ----- //
     auto stop = high_resolution_clock::now();                   // interrompe o cronômetro
     auto duration = duration_cast<milliseconds>(stop - start);  // calcula a duração
-    cout << "Tempo de execucao: " << duration.count() << "ms" << endl;
+    cout << "Tempo de execucao: " << duration.count() << "ms" << endl << endl;
 }
 // # isValidCycle
 bool CycleDetectionPermutation::isValidCycle(const vector<int>& subset, vector<vector<bool>>& adjMtx) {

@@ -43,10 +43,10 @@ int CycleDetectionDFS::findAllUniqueCycles() {
     cout << "Total de ciclos: " << uniqueCycles.size() << endl;
 
     // ----- FINALIZAÇÃO ----- //
-    auto stop = high_resolution_clock::now();                               // interrompe o cronômetro
-    auto duration = duration_cast<milliseconds>(stop - start);              // calcula a duração da execução
-    cout << "Tempo de execucao: " << duration.count() << "ms" << endl;      // exibe o tempo de execução
-    return uniqueCycles.size();                                             // retorna o número total de ciclos únicos
+    auto stop = high_resolution_clock::now();                                       // interrompe o cronômetro
+    auto duration = duration_cast<milliseconds>(stop - start);                      // calcula a duração da execução
+    cout << "Tempo de execucao: " << duration.count() << "ms" << endl << endl;      // exibe o tempo de execução
+    return uniqueCycles.size();                                                     // retorna o número total de ciclos únicos
 }
 
 // =============== //
