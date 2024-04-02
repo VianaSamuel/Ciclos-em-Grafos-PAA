@@ -14,7 +14,6 @@ class CycleDetectionPermutation {
 private:
     const Graph& G;
     int cycleCount;
-    int operationCount;
 
     void printCycle(const vector<int>& cycle);
     bool isValidCycle(const vector<int>& subset, vector<vector<bool>>& adjMtx);
@@ -23,7 +22,6 @@ private:
 public:
     CycleDetectionPermutation(const Graph& G);
     void findAllCycles();
-    int getCycleCount() const;
 };
 
 #endif

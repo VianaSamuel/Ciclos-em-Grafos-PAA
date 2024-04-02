@@ -7,7 +7,7 @@ using namespace std::chrono;
 //       CONSTRUTOR       //
 // ====================== //
 // inicializa o CycleDetectionDFS com um grafo fornecido
-CycleDetectionDFS::CycleDetectionDFS(const Graph& G) : G(G), operationCount(0) {}
+CycleDetectionDFS::CycleDetectionDFS(const Graph& G) : G(G) {}
 
 
 // ==================== //
@@ -46,7 +46,6 @@ int CycleDetectionDFS::findAllUniqueCycles() {
     auto stop = high_resolution_clock::now();                               // interrompe o cronômetro
     auto duration = duration_cast<milliseconds>(stop - start);              // calcula a duração da execução
     cout << "Tempo de execucao: " << duration.count() << "ms" << endl;      // exibe o tempo de execução
-    cout << "Contagem de operacoes: " << operationCount << endl << endl;    // exibe a contagem de operações
     return uniqueCycles.size();                                             // retorna o número total de ciclos únicos
 }
 

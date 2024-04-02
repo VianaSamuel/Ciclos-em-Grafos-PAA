@@ -12,7 +12,6 @@ using namespace std;
 
 class CycleDetectionDFS {
     const Graph& G;
-    int operationCount;
 
 public:
     CycleDetectionDFS(const Graph& G);
